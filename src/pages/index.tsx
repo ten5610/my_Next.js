@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import {styled} from 'goober'
+import { styled } from 'goober'
+import { Img } from '@/1_atoms/Icon'
 
 const Main = styled('main')`
 color:    brown;
@@ -18,6 +19,7 @@ export default function Home() {
     </Head>
     <Main>
       <h1>Start Next.js Project</h1>
+      <Img />
     </Main>
   </>
 }
