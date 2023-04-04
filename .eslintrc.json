@@ -1,9 +1,37 @@
 {
-  "extends": ["next", "next/core-web-vitals"],
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "root": true,
   "rules": {
-    "quotes": ["error", "single"],
-    "semi": ["error", "never", {"beforeStatementContinuationChars": "never"}],
-    "no-console": ["warn", { "allow": ["warn", "error"] }],
-    "no-unused-vars": ["error", { "vars": "all" }]
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "never",
+      {
+        "beforeStatementContinuationChars": "never"
+      }
+    ],
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error"
+    ]
   }
 }

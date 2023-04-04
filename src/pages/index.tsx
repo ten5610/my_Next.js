@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { styled } from 'goober'
 import { Icon } from '@/2_molecules/Icon'
 import { Map } from '@/2_molecules/Map'
-import { useState } from 'react'
+import { ChangeEventHandler, useState } from 'react'
 
 const Main = styled('main')`
 color:    brown;
@@ -12,12 +12,28 @@ text-align: center;
 `
 
 const Maps = [
-  { value: '/R6TAC_ALLMAPS/maps/bank/bank1f.jpg', label: 'Bank1f' },
-  { value: '/R6TAC_ALLMAPS/maps/bank/bank2f.jpg', label: 'Bank2f' }
+  { value: '/R6TAC_ALLMAPS/maps/bank/bank1f.jpg', label: 'Bank1f', key: 'bank1f' },
+  { value: '/R6TAC_ALLMAPS/maps/bank/bank2f.jpg', label: 'Bank2f', key: 'bank2f' }
 ]
 
+type Props = {
+  onChange: ChangeEventHandler<HTMLSelectElement>
+}
+
+function SelectMap({ onChange }: Props) {
+  return (
+    <select onChange={onChange}>
+      {Maps.map(it =>
+        <option key={it.key} value={it.value}>
+          {it.label}
+        </option>
+      )}
+    </select>
+  )
+}
+
 export default function Home() {
-  const [map, setMap] = useState('/R6TAC_ALLMAPS/maps/bank/bank1f.jpg')
+  const [map, setMapImage] = useState('/R6TAC_ALLMAPS/maps/bank/bank1f.jpg')
   return <>
     <Head>
       <title>R6S Board</title>
@@ -29,10 +45,5 @@ export default function Home() {
       <Icon />
       <Map pass={map} />
     </Main>
-    <select onChange={(e) => { setMap(e.target.value) }}>
-      {Maps.map(it =>
-        <option value={it.value}>{it.label}</option>
-      )}
-    </select>
-  </>
+    <SelectMap onChange={(e) => { setMapImage(e.target.value) }} />  </>
 }
