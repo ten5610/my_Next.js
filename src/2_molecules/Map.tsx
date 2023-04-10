@@ -1,4 +1,4 @@
-import { Img } from '@/1_atoms/Img'
+import Image from 'next/image'
 
 type Props = {
 	pass: string;
@@ -6,4 +6,4 @@ type Props = {
 
 
 export const Map = ({ pass }: Props) =>
-	<Img pass={pass} width={600} height={400} />
+	<Image src={pass} width={600} height={400} alt='map' />
