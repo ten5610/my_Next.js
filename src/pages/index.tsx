@@ -1,16 +1,25 @@
 import Head from 'next/head'
 import { styled } from 'goober'
-import { Map } from '@/2_molecules/Map'
 import { useState } from 'react'
 import { SelectMap } from '@/3_organisms/SelectMap'
+import { SelectFlore } from '@/3_organisms/SelectFlore'
 import { IconList } from '@/2_molecules/IconList'
-import { Icon } from '@/2_molecules/Icon'
+import { Map } from '@/1_atoms/Map'
+
+// [ ] リファクタリングされたマップコンポーネント
+// [x] Map の階層切り替えスイッチ
 
 const Main = styled('main')`
+display: grid;
+grid-template-columns: auto 20%;
+grid-template-rows: auto 20%;
 `
+
+const data: string[] = ['1f', '2f']
 
 export default function Home() {
   const [map, setMapImage] = useState('/R6TAC_ALLMAPS/maps/bank/bank1f.jpg')
+  const [flores, setFlores] = useState<string[]>(data)
   return <>
     <Head>
       <title>R6S Board</title>
@@ -19,11 +28,10 @@ export default function Home() {
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Main>
-      <Icon />
-      {/* <Icon2 /> */}
-      {/* <IconList /> */}
       <Map pass={map} />
-      <SelectMap onChange={(e) => { setMapImage(e.target.value) }} />
+      <SelectMap handleChange={(v) => { setMapImage(v) }} />
+      <IconList />
+      <SelectFlore data={flores} />
     </Main>
   </>
 }

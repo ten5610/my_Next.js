@@ -1,37 +1,84 @@
+import React, { useState, MouseEvent } from 'react'
 import Image from 'next/image'
-import { MouseEventHandler } from 'react'
+import { styled } from 'goober'
+import { OperatorIcon } from '@/1_atoms/OperatorIcon'
 
-// [ ] ドラッグアンドドロップできる新規アイコン
-// [ ] カーソルの座標を取得
-// [x] アイコンリストの配列(src,name)
-// [ ] マップ上のアイコンの配列(src,座標)
-// [x] handeClick が event を受け取ること
+// [x] ドラッグアンドドロップできる新規アイコン
 
-type Props = {
+const Span = styled('span') <{ left: number, top: number }>`
+  position: absolute;
+  left: ${props => props.left}px;
+  top: ${props => props.top}px;
+`
+
+type OperaterRole = 'atack' | 'defence';
+
+type Operater = {
 	name: string;
-	src: string;
+	imgpath: string;
+	role: OperaterRole;
+	id: string;
 }
 
-const Icons: Props[] = [
-	{ name: 'sledge', src: '/R6TAC_ALLMAPS/operater/attackers/1sledge.jpg' },
-	{ name: 'thatcher', src: '/R6TAC_ALLMAPS/operater/attackers/2thatcher.jpg' },
+const operaters: Operater[] = [
+	{
+		name: 'sledge',
+		imgpath: '/R6TAC_ALLMAPS/operater/attackers/1sledge.jpg',
+		role: 'atack',
+		id: 'sas01'
+	},
+	{
+		name: 'thatcher',
+		imgpath: '/R6TAC_ALLMAPS/operater/attackers/2thatcher.jpg',
+		role: 'atack',
+		id: 'sas02'
+	},
 ]
 
-const handeClick2: MouseEventHandler<HTMLImageElement> = (e) =>
-	console.log(e.currentTarget.alt)
-
-export const IconList = () => {
-	return <>
-		{Icons.map((it, idx) =>
-			<Image
-				key={idx}
-				src={it.src}
-				width={50}
-				height={50}
-				alt={it.name}
-				onClick={handeClick2}
-			/>
-		)}
-	</>
+type IconPosition = {
+	left: number;
+	top: number;
+	operaterid: string;
 }
 
+export const IconList = () => {
+
+	const [data, setData] = useState<IconPosition[]>([])
+
+	const addIcon = (id: string) => {
+		setData(prev => [...prev, { left: 100 + prev.length * 50, top: 100, operaterid: id }])
+	}
+
+	const changePosition = (idx: number, e: MouseEvent<HTMLHeadingElement>) => {
+		setData(cur =>
+			cur.map((pos, i) =>
+				i === idx ? { ...pos, left: e.clientX, top: e.clientY } : pos
+			)
+		)
+	}
+
+
+	return <>
+		<div>
+			{operaters.map((op, idx) =>
+				<OperatorIcon key={idx} imgpath={op.imgpath} onClick={() => addIcon(op.id)} />
+			)}
+		</div>
+		{data.map((pos, idx) => {
+			const operator = operaters.find(op => op.id === pos.operaterid)
+			return <>
+				{operator && <Span key={idx} left={pos.left} top={pos.top}>
+					<Image
+						src={operator.imgpath}
+						width={50}
+						height={50}
+						alt={`${operator.name}icon`}
+						onDrag={(e) => { changePosition(idx, e) }}
+						onDragEnd={(e) => { changePosition(idx, e) }}
+					/>
+				</Span>
+				}
+			</>
+		})}
+	</>
+}

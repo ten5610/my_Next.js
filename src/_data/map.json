@@ -1,0 +1,32 @@
+[
+	{
+		"value": "/R6TAC_ALLMAPS/maps/bank/bank1f.jpg",
+		"label": "Bank1f",
+		"key": "bank1f"
+	},
+	{
+		"value": "/R6TAC_ALLMAPS/maps/bank/bank2f.jpg",
+		"label": "Bank2f",
+		"key": "bank2f"
+	},
+	{
+		"value": "/R6TAC_ALLMAPS/maps/border/border1f.jpg",
+		"label": "Border1f",
+		"key": "border1f"
+	},
+	{
+		"value": "/R6TAC_ALLMAPS/maps/border/border2f.jpg",
+		"label": "Border2f",
+		"key": "border2f"
+	},
+	{
+		"value": "/R6TAC_ALLMAPS/maps/cafe_dostoyevsky/cafe_dostoyevsky1f.jpg",
+		"label": "Cafe_Dostoyevsky1f",
+		"key": "cafe_dostoyevsky1f"
+	},
+	{
+		"value": "/R6TAC_ALLMAPS/maps/cafe_dostoyevsky/cafe_dostoyevsky2f.jpg",
+		"label": "Cafe_Dostoyevsky2f",
+		"key": "cafe_dostoyevsky2f"
+	}
+]

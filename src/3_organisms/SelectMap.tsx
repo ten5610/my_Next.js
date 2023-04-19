@@ -1,4 +1,6 @@
-import { ChangeEventHandler } from 'react'
+import map from '../_data/map.json'
+
+// [X] json からマップデータを持ってくるように
 
 type Map = {
 	value: string;
@@ -6,22 +8,15 @@ type Map = {
 	key: string;
 }
 
-const Maps: Map[] = [
-	{ value: '/R6TAC_ALLMAPS/maps/bank/bank1f.jpg', label: 'Bank1f', key: 'bank1f' },
-	{ value: '/R6TAC_ALLMAPS/maps/bank/bank2f.jpg', label: 'Bank2f', key: 'bank2f' },
-	{ value: '/R6TAC_ALLMAPS/maps/border/border1f.jpg', label: 'Border1f', key: 'border1f' },
-	{ value: '/R6TAC_ALLMAPS/maps/border/border2f.jpg', label: 'Border2f', key: 'border2f' },
-	{ value: '/R6TAC_ALLMAPS/maps/cafe_dostoyevsky/cafe_dostoyevsky1f.jpg', label: 'Cafe_Dostoyevsky1f', key: 'cafe_dostoyevsky1f' },
-	{ value: '/R6TAC_ALLMAPS/maps/cafe_dostoyevsky/cafe_dostoyevsky2f.jpg', label: 'Cafe_Dostoyevsky2f', key: 'cafe_dostoyevsky2f' },
-	// 他のデータをここに追加してください
-]
 type Props = {
-	onChange: ChangeEventHandler<HTMLSelectElement>
+	handleChange: (_v: string) => void
 }
 
-export function SelectMap({ onChange }: Props) {
+const Maps: Map[] = map
+
+export function SelectMap({ handleChange }: Props) {
 	return (
-		<select onChange={onChange}>
+		<select onChange={(e) => handleChange(e.target.value)}>
 			{Maps.map(it =>
 				<option key={it.key} value={it.value}>
 					{it.label}
