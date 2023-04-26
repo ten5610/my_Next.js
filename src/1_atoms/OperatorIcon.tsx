@@ -2,14 +2,14 @@ import Image from 'next/image'
 import { FC, MouseEventHandler } from 'react'
 
 type Props = {
-	imgpath: string;
+	imgPath: string;
 	onClick: MouseEventHandler<HTMLImageElement>
 }
 
-export const OperatorIcon: FC<Props> = ({ imgpath, onClick }) => {
+export const OperatorIcon: FC<Props> = ({ imgPath, onClick }) => {
 	return (
 		<Image
-			src={imgpath}
+			src={imgPath}
 			width={50}
 			height={50}
 			alt='icon'

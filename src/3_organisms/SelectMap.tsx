@@ -1,27 +1,15 @@
-import map from '../_data/map.json'
+import { tacticalMaps } from '../_data/maps'
 
-// [X] json からマップデータを持ってくるように
-
-type Map = {
-	value: string;
-	label: string;
-	key: string;
+type SelectMapProps = {
+	handleChange: (id: string) => void
 }
 
-type Props = {
-	handleChange: (_v: string) => void
-}
-
-const Maps: Map[] = map
-
-export function SelectMap({ handleChange }: Props) {
-	return (
-		<select onChange={(e) => handleChange(e.target.value)}>
-			{Maps.map(it =>
-				<option key={it.key} value={it.value}>
-					{it.label}
-				</option>
-			)}
-		</select>
-	)
+export const SelectMap = ({ handleChange }: SelectMapProps) => {
+	return <select onChange={(e) => handleChange(e.target.value)}>
+		{tacticalMaps.map((it, idx) =>
+			<option key={idx} value={it.id}>
+				{it.label}
+			</option>
+		)}
+	</select>
 }

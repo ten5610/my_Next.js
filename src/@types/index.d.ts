@@ -1,18 +1,35 @@
-type Flore = 'b1' | '1f' | '2f' | '3f';
+type OperatorRole = 'attack' | 'defense';
 
-type Flores = {
-	flore: string;
-	imgpass: string;
+type Floor = 'b1' | '1f' | '2f' | '3f';
+
+type Operator = {
+	name: string;
+	imgPath: string;
+	role: OperatorRole;
+	id: string;
 }
 
-type Map2 = {
+type IconPosition = {
+	left: number;
+	top: number;
+	operatorId: string;
+	imgPath: string;
+	name: string;
+}
+
+type Floors = {
+	floor: Floor;
+	imgPass: string;
+}
+
+type TacticalMap = {
 	label: string;
 	value: string;
 	id: string;
-	flores: Flores[];
+	floors: Floors[];
 }
 
-declare module '../_data/map2.json' {
-	const data: Map2[]
-	export = data;
+type CurrentDisplay = {
+	id: string
+	floor: Floor
 }
