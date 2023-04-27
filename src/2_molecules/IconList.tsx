@@ -2,14 +2,20 @@ import Image from 'next/image'
 import { styled } from 'goober'
 import { OperatorIcon } from '@/1_atoms/OperatorIcon'
 import { useOperator } from '@/hooks/useOperator'
+import { useState } from 'react'
 
-// [ ] onDragStart でダミーを動かす
-// [ ] onDragEnd の時の座標を配列に
+// [ ] css cursor grab と grabbing
 
 const Span = styled('span') <{ left: number, top: number }>`
   position: absolute;
   left: ${props => props.left - 30}px;
   top: ${props => props.top - 25}px;
+	.dragging {
+		cursor: grabbing;
+	}
+	:hover {
+		cursor: grab;
+	}
 `
 
 type props = {
@@ -34,18 +40,26 @@ type Props33 = {
 	name: string
 	handleMove: (_x: number, _y: number) => void
 }
-export const PieceOnMap = ({ imgPath, name, pos, handleMove }: Props33) =>
-	<Span left={pos.left} top={pos.top}>
+
+export const PieceOnMap = ({ imgPath, name, pos, handleMove }: Props33) => {
+
+	const [dragging, setDragging] = useState(false)
+
+	return <Span left={pos.left} top={pos.top} className={dragging ? 'dragging' : ''}
+		onDragStart={() => setDragging(true)}
+		onDragEnd={(e) => {
+			handleMove(e.clientX, e.clientY)
+			setDragging(false)
+		}}
+	>
 		<Image
 			src={imgPath}
 			width={50}
 			height={50}
 			alt={`${name}icon`}
-			// onDrag={(e) => { handleMove(e.clientX, e.clientY) }}
-			onDragEnd={(e) => { handleMove(e.clientX, e.clientY) }}
 		/>
 	</Span>
-
+}
 export const IconList = () => {
 	const { operatorPositions, changePosition } = useOperator()
 
