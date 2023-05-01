@@ -4,8 +4,6 @@ import { OperatorIcon } from '@/1_atoms/OperatorIcon'
 import { useOperator } from '@/hooks/useOperator'
 import { useState } from 'react'
 
-// [ ] css cursor grab と grabbing
-
 const Span = styled('span') <{ left: number, top: number }>`
   position: absolute;
   left: ${props => props.left - 30}px;
@@ -47,10 +45,12 @@ export const PieceOnMap = ({ imgPath, name, pos, handleMove }: Props33) => {
 
 	return <Span left={pos.left} top={pos.top} className={dragging ? 'dragging' : ''}
 		onDragStart={() => setDragging(true)}
+		onMouseDown={() => setDragging(true)}
 		onDragEnd={(e) => {
 			handleMove(e.clientX, e.clientY)
 			setDragging(false)
 		}}
+		onMouseUp={() => setDragging(false)}
 	>
 		<Image
 			src={imgPath}
@@ -60,6 +60,7 @@ export const PieceOnMap = ({ imgPath, name, pos, handleMove }: Props33) => {
 		/>
 	</Span>
 }
+
 export const IconList = () => {
 	const { operatorPositions, changePosition } = useOperator()
 
