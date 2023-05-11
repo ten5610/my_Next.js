@@ -51,5 +51,24 @@ export const tacticalMaps: TacticalMap[] = [
 				imgPass: '/R6TAC_ALLMAPS/maps/cafe_dostoyevsky/cafe_dostoyevsky3f.jpg'
 			}
 		]
+	},
+	{
+		label: 'NightHavenLab',
+		value: 'nighthavenlab',
+		id: 'm04',
+		floors: [
+			{
+				floor: 'b1',
+				imgPass: '/R6TAC_ALLMAPS/maps/nighthavenlabs/r6-maps-nighthavenlabs-blueprint-1.jpg'
+			},
+			{
+				floor: '1f',
+				imgPass: '/R6TAC_ALLMAPS/maps/nighthavenlabs/r6-maps-nighthavenlabs-blueprint-2.jpg'
+			},
+			{
+				floor: '2f',
+				imgPass: '/R6TAC_ALLMAPS/maps/nighthavenlabs/r6-maps-nighthavenlabs-blueprint-3.jpg'
+			}
+		]
 	}
 ]
